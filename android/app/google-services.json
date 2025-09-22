@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "845038278543",
+    "project_id": "porcamanage",
+    "storage_bucket": "porcamanage.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:845038278543:android:cd77add22fc9da8b385dfa",
+        "android_client_info": {
+          "package_name": "com.example.porcamanage"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrXz-GAGKotxPc2f9eKg0QdzdTuDXncqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
