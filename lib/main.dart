@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:porcamanage/pages/auth/register.dart';
 import 'package:porcamanage/pages/auth_wrapper.dart';
 import 'package:porcamanage/pages/onboarding_screen.dart';
@@ -19,6 +20,9 @@ void main() async {
   );
   final prefs = await SharedPreferences.getInstance();
   final seenOnboarding = prefs.getBool('seenOnboarding') ?? false;
+
+  // Initialise les locales
+  await initializeDateFormatting('fr_FR',null);
 
   runApp(MyApp(seenOnboarding: seenOnboarding));
 }

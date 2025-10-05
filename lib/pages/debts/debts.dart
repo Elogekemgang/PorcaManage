@@ -199,7 +199,7 @@ class Debts extends StatelessWidget {
         }
 
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return _buildEmptyState(isDebt);
+          return _buildEmptyState(context, isDebt);
         }
 
         final debts = snapshot.data!;
@@ -262,7 +262,7 @@ class Debts extends StatelessWidget {
     );
   }
 
-  Widget _buildEmptyState(bool isDebt) {
+  Widget _buildEmptyState(BuildContext context, bool isDebt) {
     return Center(
       child: Padding(
         padding: EdgeInsets.all(20),
@@ -293,7 +293,7 @@ class Debts extends StatelessWidget {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},// => _showDebtTypeMenu(),
+              onPressed: () => _showDebtTypeMenu(context),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.yellow[700],
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
@@ -570,7 +570,7 @@ class Debts extends StatelessWidget {
                 onDelete: () => _deleteDebt(context, debt),
                 onUpdate: () => _updateDebtStatus(context, debt),
                 onEdit: () => _editDebt(context, debt),
-              )).toList(),
+              )),
           ],
         ),
       ),

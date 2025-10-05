@@ -49,12 +49,12 @@ class _ScreenManageState extends State<ScreenManage> {
         items: [
           SalomonBottomBarItem(
             icon: Image.asset("assets/financial-profit.png",width: 25,),
-            title: Text("Home"),
+            title: Text("Accueil"),
             selectedColor: Colors.purple,
           ),
           SalomonBottomBarItem(
             icon: Image.asset("assets/earning.png",width: 25,),
-            title: Text("Debts"),
+            title: Text("Transactions"),
             selectedColor: Colors.pink,
             unselectedColor: Colors.green
           ),
@@ -69,10 +69,10 @@ class _ScreenManageState extends State<ScreenManage> {
           ),SalomonBottomBarItem(
             icon: Image.asset("assets/artificial-intelligence.png",width: 25,),
             title: Text("Chat"),
-            selectedColor: Colors.orange,
+            selectedColor: Colors.blue,
           ),
           SalomonBottomBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.person,color: Colors.teal,),
             title: Text("Profile"),
             selectedColor: Colors.teal,
           ),
