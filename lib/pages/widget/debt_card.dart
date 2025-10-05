@@ -7,7 +7,7 @@ class DebtCard extends StatelessWidget {
   final Function onDelete;
   final Function onUpdate;
 
-  const DebtCard({super.key, required this.debt, required this.onDelete, required this.onUpdate});
+  const DebtCard({super.key, required this.debt, required this.onDelete, required this.onUpdate, void Function()? onEdit});
 
   Color _getStatusColor(String status) {
     switch (status) {
@@ -46,7 +46,7 @@ class DebtCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dateFormat = DateFormat('dd/MM/yyyy');
-    final currencyFormat = NumberFormat.currency(locale: 'fr_FR', symbol: '€');
+    final currencyFormat = NumberFormat.currency(locale: 'fr_FR', symbol: 'FCFA');
 
     return Card(
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),

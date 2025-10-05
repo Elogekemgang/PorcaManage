@@ -48,6 +48,9 @@ dependencies:
   intl: ^0.20.2
   firebase_ai: ^3.2.0
   iconsax: ^0.0.8
+  firebase_vertexai: ^2.2.0
+  image_picker: ^1.2.0
+  image_cropper: ^11.0.0
   # charts_flutter: ^0.12.0
 
 dev_dependencies:

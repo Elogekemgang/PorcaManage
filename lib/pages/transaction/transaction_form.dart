@@ -99,7 +99,7 @@ class _TransactionFormState extends State<TransactionForm> {
               TextFormField(
                 controller: _amountController,
                 decoration: InputDecoration(
-                  labelText: 'Montant (€)',
+                  labelText: 'Montant (FCFA)',
                   border: OutlineInputBorder(),
                 ),
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
@@ -114,7 +114,7 @@ class _TransactionFormState extends State<TransactionForm> {
                 },
               ),
               SizedBox(height: 16),
-              /*DropdownButtonFormField<String>(
+              DropdownButtonFormField<String>(
                 value: _selectedCategory,
                 decoration: InputDecoration(
                   labelText: 'Catégorie',
@@ -126,12 +126,12 @@ class _TransactionFormState extends State<TransactionForm> {
                     child: Text(category),
                   );
                 }).toList(),
-                onChanged: (String newValue) {
+                onChanged: (String? newValue) {
                   setState(() {
-                    _selectedCategory = newValue;
+                    _selectedCategory = newValue!;
                   });
                 },
-              ),*/
+              ),
               SizedBox(height: 16),
               Row(
                 children: [

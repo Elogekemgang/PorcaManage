@@ -9,29 +9,42 @@ import 'package:porcamanage/services/user_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:porcamanage/pages/auth/login.dart';
 
-void main () async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   final prefs = await SharedPreferences.getInstance();
   final seenOnboarding = prefs.getBool('seenOnboarding') ?? false;
-  runApp(MyApp(seenOnboarding: seenOnboarding,));
+
+  runApp(MyApp(seenOnboarding: seenOnboarding));
 }
 
 class MyApp extends StatelessWidget {
   final bool seenOnboarding;
   const MyApp({super.key, required this.seenOnboarding});
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers:[
+      providers: [
         Provider<AuthService>(create: (_) => AuthService()),
         Provider<UserService>(create: (_) => UserService()),
-        Provider<FirestoreService>(create: (_) => FirestoreService("userId")),
+
+        // 🔥 Écoute le user connecté
+        StreamProvider<User?>(
+          create: (_) => FirebaseAuth.instance.authStateChanges(),
+          initialData: null,
+        ),
+
+        // 🔥 FirestoreService dépend du user
+        ProxyProvider<User?, FirestoreService?>(
+          update: (_, user, __) =>
+          user != null ? FirestoreService(user.uid) : null,
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -39,16 +52,11 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         ),
-        home: seenOnboarding ? AuthWrapper() : OnboardingScreen(),
-        //home: Login(),
+        home: seenOnboarding ? const AuthWrapper() : const OnboardingScreen(),
         routes: {
-          '/login': (context) => Login(),
-          '/register': (context) => Register(),
-          //'/home': (context) => Home(),
-          //'/screenmanage': (context) => ScreenManage(),
-          '/authwrapper': (context) => AuthWrapper(),
-         // '/mes-annonces': (context) => MesAnnoncesPage(),
-          //'/chat': (context) => ChatPage(),
+          '/login': (context) => const Login(),
+          '/register': (context) => const Register(),
+          '/authwrapper': (context) => const AuthWrapper(),
         },
       ),
     );

@@ -7,9 +7,9 @@ import '../../services/firestore_service.dart';
 
 class DebtFormScreen extends StatefulWidget {
   final String type; // 'debt' or 'credit'
-  final Debt existingDebt;
+  final Debt? existingDebt;
 
-  const DebtFormScreen({super.key,  required this.type, required this.existingDebt});
+  const DebtFormScreen({super.key,  required this.type, this.existingDebt});
 
   @override
   _DebtFormScreenState createState() => _DebtFormScreenState();
@@ -32,15 +32,16 @@ class _DebtFormScreenState extends State<DebtFormScreen> {
     super.initState();
 
     // Si on édite une dette existante, pré-remplir les champs
-    if (widget.existingDebt != null) {
-      _titleController.text = widget.existingDebt.title;
-      _amountController.text = widget.existingDebt.amount.toString();
-      _personController.text = widget.existingDebt.person ?? '';
-      _descriptionController.text = widget.existingDebt.description ?? '';
-      _selectedDate = widget.existingDebt.date;
-      _selectedDueDate = widget.existingDebt.dueDate;
-      _selectedType = widget.existingDebt.type;
-      _selectedStatus = widget.existingDebt.status;
+    final existingDebt = widget.existingDebt;
+    if (existingDebt != null) {
+      _titleController.text = existingDebt.title;
+      _amountController.text = existingDebt.amount.toString();
+      _personController.text = existingDebt.person ?? '';
+      _descriptionController.text = existingDebt.description ?? '';
+      _selectedDate = existingDebt.date;
+      _selectedDueDate = existingDebt.dueDate;
+      _selectedType = existingDebt.type;
+      _selectedStatus = existingDebt.status;
     } else if (widget.type != null) {
       _selectedType = widget.type;
     }
@@ -68,7 +69,7 @@ class _DebtFormScreenState extends State<DebtFormScreen> {
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       final debt = Debt(
-        id: widget.existingDebt.id,
+        id: widget.existingDebt!.id,
         title: _titleController.text,
         amount: double.parse(_amountController.text),
         date: _selectedDate,
@@ -179,9 +180,9 @@ class _DebtFormScreenState extends State<DebtFormScreen> {
                 TextFormField(
                   controller: _amountController,
                   decoration: InputDecoration(
-                    labelText: 'Montant (€)',
+                    labelText: 'Montant (FCFA)',
                     border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.euro),
+                    prefixIcon: Icon(Icons.money),
                   ),
                   keyboardType: TextInputType.numberWithOptions(decimal: true),
                   validator: (value) {

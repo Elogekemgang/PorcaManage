@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:porcamanage/pages/profile.dart';
 import 'package:porcamanage/pages/transaction/transaction.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -21,7 +22,7 @@ class _ScreenManageState extends State<ScreenManage> {
     Transactions(),
     Debts(),
     ChatBotPage(),
-    Center(child: Text("Profile Page")),  // temp placeholder
+    ProfileScreen(),  // temp placeholder
   ];
 
   int _currentIndex = 0;
@@ -47,21 +48,26 @@ class _ScreenManageState extends State<ScreenManage> {
         },
         items: [
           SalomonBottomBarItem(
-            icon: Icon(Icons.home),
+            icon: Image.asset("assets/financial-profit.png",width: 25,),
             title: Text("Home"),
             selectedColor: Colors.purple,
           ),
           SalomonBottomBarItem(
-            icon: Icon(Icons.favorite_border),
+            icon: Image.asset("assets/earning.png",width: 25,),
             title: Text("Debts"),
             selectedColor: Colors.pink,
+            unselectedColor: Colors.green
           ),
           SalomonBottomBarItem(
-            icon: Icon(Icons.search),
-            title: Text("Search"),
+            icon: Image.asset("assets/pay.png",width: 25
+              ,),
+            title: Text("D & C"),
             selectedColor: Colors.orange,
+              unselectedColor: Colors.green,
+            activeIcon: Image.asset("assets/pay.png",width: 25,),
+
           ),SalomonBottomBarItem(
-            icon: Icon(Icons.chat),
+            icon: Image.asset("assets/artificial-intelligence.png",width: 25,),
             title: Text("Chat"),
             selectedColor: Colors.orange,
           ),
