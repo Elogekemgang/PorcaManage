@@ -4,11 +4,13 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:porcamanage/pages/auth/register.dart';
 import 'package:porcamanage/pages/auth_wrapper.dart';
 import 'package:porcamanage/pages/onboarding_screen.dart';
+import 'package:porcamanage/pages/screen_manage.dart';
 import 'package:porcamanage/services/auth_service.dart';
 import 'package:porcamanage/services/firestore_service.dart';
 import 'package:porcamanage/services/user_service.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'biometrie.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:porcamanage/pages/auth/login.dart';
@@ -56,11 +58,13 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         ),
-        home: seenOnboarding ? const AuthWrapper() : const OnboardingScreen(),
+        home: seenOnboarding ? const AuthScreen() : const OnboardingScreen(),
         routes: {
           '/login': (context) => const Login(),
           '/register': (context) => const Register(),
           '/authwrapper': (context) => const AuthWrapper(),
+          '/biometrie': (context) => const AuthScreen(),
+          '/screenmanage': (context) => const ScreenManage(),
         },
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import '../../biometrie.dart';
 import '../../customers/colors.dart';
 import '../../customers/custom_buttom.dart';
 import '../../customers/custom_input.dart';
@@ -42,7 +43,12 @@ class _LoginState extends State<Login> {
         _passwordController.text.trim(),
       );
 
-      Navigator.pushReplacementNamed(context, '/screenmanage');
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => AuthScreen()),
+      );
+
+      //Navigator.pushReplacementNamed(context, '/screenmanage');
 
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(

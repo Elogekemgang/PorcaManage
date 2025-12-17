@@ -4,6 +4,7 @@ import 'package:porcamanage/pages/screen_manage.dart';
 import 'package:provider/provider.dart';
 
 import '../services/auth_service.dart';
+import '../services/firestore_service.dart';
 import 'auth/login.dart';
 
 class AuthWrapper extends StatelessWidget {
@@ -22,13 +23,22 @@ class AuthWrapper extends StatelessWidget {
           if (user == null) {
             return const Login();
           } else {
-            if (!user.emailVerified) {
-              return ScreenManage();
+            // RÉCUPÈRE LE FirestoreService AVANT DE NAVIGUER
+            final firestoreService = Provider.of<FirestoreService?>(context);
+
+            if (firestoreService == null) {
+              // Le service n'est pas encore prêt, attends
+              return const Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
             }
+
+            // Maintenant le service est prêt, on peut afficher ScreenManage
             return const ScreenManage();
           }
         } else if (snapshot.connectionState == ConnectionState.waiting) {
-
           return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
